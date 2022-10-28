@@ -14,7 +14,7 @@ class Lights:
         print('Turned OFF')
 
 class Cars(Doors, Lights):
-    def __init__(self, color = None, model = None, kuzov = None, price = None, kpp= None, sost = None):
+    def __init__(self, color = None, model = None, kuzov = None, price = None, kpp= None, sost = None, god = None):
         self.fari = None
         self.color = color
         self.model = model
@@ -22,6 +22,7 @@ class Cars(Doors, Lights):
         self.price = price
         self.kpp = kpp
         self.sost = sost
+        self.god = god
     def carinfo(self):
         self.Open(3)
         print(self.doors)
@@ -35,7 +36,7 @@ class Interface():
         f=open('car3')
         for s in f:
             m=s.split()
-            massiv.append(Cars(m[0],m[1],m[2],m[3],m[4],m[5]))
+            massiv.append(Cars(m[0],m[1],m[2],m[3],m[4],m[5],m[6]))
     @staticmethod
     def Save():
         f=open('car3','w')
@@ -80,6 +81,7 @@ class Interface():
                 print('6. Изменить состояние')
                 print('7. Открыть/закрыть двери')
                 print('8. Включить/выключить фары')
+                print('9. Изменить год')
                 print('0. Назад')
                 print('_______________________')
                 b = input()
@@ -139,6 +141,11 @@ class Interface():
                             massiv[i].On()
                         if c == '2':
                             massiv[i].Off()
+                if b == '9':
+                    print('Введите новый год')
+                    massiv[i].god= input()
+                    Interface.Save()
+                    print('Год изменен')
                 if b == '0':
                     k = Interface()
             elif a == '3':
@@ -168,6 +175,8 @@ class Interface():
                         print('Состояние -', massiv[i].sost)
                     if massiv[i].fari != None:
                         print ('Фары -',massiv[i].fari)
+                    if massiv[i].god != None:
+                        print ('Год -',massiv[i].god)
                     print('Двери -',massiv[i].doors)
                     input()
             elif a == '4':
